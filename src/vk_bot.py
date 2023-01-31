@@ -1,6 +1,13 @@
-import bs4
+from bs4 import BeautifulSoup
 import requests
+
+
 class VkBot:
+    @staticmethod
+    def _clean_all_tag_from_str(string_line):
+        res = string_line[7:]
+        res = res.split(' ')
+        return res[0] + ' ' + res[1]
 
     def __init__(self, user_id):
         print("Создан объект бота!")
@@ -11,30 +18,12 @@ class VkBot:
 
     def _get_user_name_from_vk_id(self, user_id):
         request = requests.get("https://vk.com/id" + str(user_id))
-        bs = bs4.BeautifulSoup(request.text, "html.parser")
-
-        user_name = self._clean_all_tag_from_str(bs.findAll("title")[0])
+        bs = BeautifulSoup(request.text, "html.parser")
+        user_name = self._clean_all_tag_from_str(str(bs.findAll("title")[0]))
 
         return user_name.split()[0]
 
-    def _clean_all_tag_from_str(string_line):
-        result = ""
-        not_skip = True
-        for i in list(string_line):
-            if not_skip:
-                if i == "<":
-                    not_skip = False
-                else:
-                    result += i
-            else:
-                if i == ">":
-                    not_skip = True
-
-        return result
-
     def new_message(self, message):
-
-
         if message.upper() == self._COMMANDS[0]:
             return f"Привет-привет, {self._USERNAME}!"
 
