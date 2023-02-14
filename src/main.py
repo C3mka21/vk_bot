@@ -2,13 +2,15 @@ import vk_api
 import random
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_bot import VkBot
+import key
 
 
 def write_msg(user_id, message):
     vk.method('messages.send', {'user_id': user_id, 'message': message,'random_id': random.randint(0, 2048)})
 
 
-token = "vk1.a.-WJxdP82ws0bFoy1xEv4CY-8y5yOGSNM2OSGBAQVI2EQhuxOmcYys8Cta7Vfs2sNcKPFLLR3Q2hPG-bdXeS5gPNYZ6cX-5mEYMB7wDklqqP6uSLTBfqlGe8wsEEfd04K516xMbc27KthAo4ophjqhPbm8ZzYSPNUiBxO_X0YzwZ6QR5t1xUAaTSfyWfXhzsNPgM86NR5F8NFSCvnRgsTIQ"
+token = key._token  #здесь должен быть ваш токен от вк сообщества
+
 vk = vk_api.VkApi(token=token)
 
 longpoll = VkLongPoll(vk)
