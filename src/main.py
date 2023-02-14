@@ -9,7 +9,7 @@ def write_msg(user_id, message):
     vk.method('messages.send', {'user_id': user_id, 'message': message,'random_id': random.randint(0, 2048)})
 
 
-token = key._token  #здесь должен быть ваш токен от вк сообщества
+token = key._token  #здесь должен быть ваш токен от вк сообщества, добавьте его в файле key.py
 
 vk = vk_api.VkApi(token=token)
 
